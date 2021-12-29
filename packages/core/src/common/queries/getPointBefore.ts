@@ -91,6 +91,12 @@ export const getPointBefore = (
         focus: previousBeforePoint,
       });
 
+      if (beforeString === '') {
+        previousBeforePoint = beforePoint;
+        beforeAt = beforePoint;
+        continue;
+      }
+
       let beforeStringToMatch = beforeString;
 
       if (unitOffset && stackLength) {

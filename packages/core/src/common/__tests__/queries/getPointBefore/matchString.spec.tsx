@@ -125,4 +125,29 @@ describe('when skipInvalid is false', () => {
       ).toEqual(output);
     });
   });
+
+  describe('when there are two adjacent text nodes', () => {
+    it('it should match matchString in the previous node', () => {
+      const input = ((
+        <editor>
+          <hp>
+            <htext italic>**hello*</htext>
+            <htext>*</htext>
+            <cursor />
+          </hp>
+        </editor>
+      ) as any) as PlateEditor;
+
+      const output = {
+        offset: 7,
+        path: [0, 0],
+      };
+
+      expect(
+        getPointBefore(input, input.selection as any, {
+          matchString: '**',
+        })
+      ).toEqual(output);
+    });
+  });
 });
